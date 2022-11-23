@@ -13,17 +13,47 @@
         <h1>Random Meal Generator!</h1>
     </header>
     <figure id="hero-image"></figure>
-
-    <section id="search-saved-container">
-        <div id="search-container"></div>
-        <div id="saved-meals-container"></div>
-    </section>
     
-    <main>
-        <div id="dinner-container" class="recipe-container"></div>
-        <div id="desser-container" class="recipe-container"></div>
-        <div id="cocktail-container" class="recipe-container"></div>
+    <main class="columns">
+        <section id="search-saved-container" class="column is-one-quarter">
+            <div id="search-container">search</div>
+            <div id="saved-meals-container">saved</div>
+        </section>
+        
+        <section id="recipes-container" class="column is-three-quarters">
+            <div id="dinner-container" class="recipe-container card">
+                <div class="card-header">Recipe Title</div>
+                <div class="card-image">
+                    <figure>
+                        <img src="https://www.placecage.com/200/300" alt="nic cage with flowy hair">
+                    </figure>
+                </div>
+                <div class="card-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </div>
+            </div>
+            <div id="dessert-container" class="recipe-container card">
+                <div class="card-header">Recipe Title</div>
+                <div class="card-image">
+                    <figure>
+                        <img src="https://www.placecage.com/200/300" alt="nic cage with flowy hair">
+                    </figure>
+                </div>
+                <div class="card-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </div>
+            </div>
+            <div id="cocktail-container" class="recipe-container card">
+                <div class="card-header">Recipe Title</div>
+                <div class="card-image">
+                    <figure>
+                        <img src="https://www.placecage.com/200/300" alt="nic cage with flowy hair">
+                    </figure>
+                </div>
+                <div class="card-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </div>
+            </div>
+        </section>
     </main>
+
 
     <footer></footer>
     <script src="./assets/js/script.js"></script>
