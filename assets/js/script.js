@@ -1,13 +1,14 @@
 var baseCocktailurl = "https://www.thecocktaildb.com/api/json/v1/1/";
 
 //gets random cocktail id
-function getCocktail() {
-  fetch(baseCocktailurl + "random.php")
+function getCocktail(alcoholic) {
+  fetch(baseCocktailurl + "filter.php?a=" + alcoholic)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      var drink = data.drinks[0];
+      //gets random drink
+      var drink = data.drinks[Math.floor(Math.random() * data.drinks.length)];
       var drinkId = drink.idDrink;
       getCocktailInformation(drinkId);
       console.log(drinkId);
@@ -27,7 +28,7 @@ function getCocktailInformation(drinkId) {
         name: drink.strDrink,
         ingredientMeasurements: [],
         ingredients: [],
-        steps: drink.strInstructions
+        steps: drink.strInstructions,
       };
       //gets list of drink ingredents
       for (let i = 1; i <= 15; i++) {
@@ -47,4 +48,7 @@ function getCocktailInformation(drinkId) {
     });
 }
 
-getCocktail();
+
+//executed on button click. 
+//value of alcoholic or non alcoholic should be passed in
+getCocktail("Non_Alcoholic");
