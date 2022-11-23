@@ -1,5 +1,7 @@
 var baseCocktailurl = "https://www.thecocktaildb.com/api/json/v1/1/";
+var baseMealUrl = "https://www.themealdb.com/api/json/v1/1/"
 
+//cocktail api functions 
 //gets random cocktail id
 function getCocktail(alcoholic) {
   fetch(baseCocktailurl + "filter.php?a=" + alcoholic)
@@ -11,7 +13,6 @@ function getCocktail(alcoholic) {
       var drink = data.drinks[Math.floor(Math.random() * data.drinks.length)];
       var drinkId = drink.idDrink;
       getCocktailInformation(drinkId);
-      console.log(drinkId);
     });
 }
 
@@ -29,6 +30,7 @@ function getCocktailInformation(drinkId) {
         ingredientMeasurements: [],
         ingredients: [],
         steps: drink.strInstructions,
+        imgSrc: drink.strDrinkThumb
       };
       //gets list of drink ingredents
       for (let i = 1; i <= 15; i++) {
@@ -48,7 +50,21 @@ function getCocktailInformation(drinkId) {
     });
 }
 
-
 //executed on button click. 
-//value of alcoholic or non alcoholic should be passed in
+//value of Alcoholic or Non_Alcoholic should be passed in
 getCocktail("Non_Alcoholic");
+
+//meal api functions
+
+function getFoodItemId(type){
+    fetch(baseMealUrl + 'filter.php?c=' + type)
+    .then(function(response){
+        return response.json()
+    })
+    .then(function (data){
+        var item = data.meals[Math.floor(Math.random() * data.meals.length)]
+        console.log(item)
+    })
+}
+
+getFoodItemId("Seafood")
