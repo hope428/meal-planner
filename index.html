@@ -4,20 +4,70 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/css/styles.css" />
     <title>Meal Planner</title>
 </head>
 <body>
 
-    <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-        <div id="myDropdown" class="dropdown-content">
-          <a href="#">Link 1</a>
-          <a href="#">Link 2</a>
-          <a href="#">Link 3</a>
-        </div>
-      </div>
+   
+
+    <header>
+        <h1>Random Meal Generator!</h1>
+    </header>
+    <figure id="hero-image"></figure>
     
+    <main class="columns">
+
+        <section id="search-saved-container" class="column is-one-quarter">
+            <div class="dropdown">
+                <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+                <div id="myDropdown" class="dropdown-content">
+                  <a href="#">Link 1</a>
+                  <a href="#">Link 2</a>
+                  <a href="#">Link 3</a>
+                </div>
+              </div>
+            <div id="search-container">search</div>
+            <div id="saved-meals-container">saved</div>
+        </section>
+        
+        <section id="recipes-container" class="column is-three-quarters">
+            <div id="dinner-container" class="recipe-container card">
+                <div class="card-header">Recipe Title</div>
+                <div class="card-image">
+                    <figure>
+                        <img src="https://www.placecage.com/200/300" alt="nic cage with flowy hair">
+                    </figure>
+                </div>
+                <div class="card-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </div>
+            </div>
+            <div id="dessert-container" class="recipe-container card">
+                <div class="card-header">Recipe Title</div>
+                <div class="card-image">
+                    <figure>
+                        <img src="https://www.placecage.com/200/300" alt="nic cage with flowy hair">
+                    </figure>
+                </div>
+                <div class="card-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </div>
+            </div>
+            <div id="cocktail-container" class="recipe-container card">
+                <div class="card-header">Recipe Title</div>
+                <div class="card-image">
+                    <figure>
+                        <img src="https://www.placecage.com/200/300" alt="nic cage with flowy hair">
+                    </figure>
+                </div>
+                <div class="card-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <footer></footer>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
