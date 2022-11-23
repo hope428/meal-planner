@@ -1,7 +1,7 @@
 var baseCocktailurl = "https://www.thecocktaildb.com/api/json/v1/1/";
-var baseMealUrl = "https://www.themealdb.com/api/json/v1/1/"
+var baseMealUrl = "https://www.themealdb.com/api/json/v1/1/";
 
-//cocktail api functions 
+//cocktail api functions
 //gets random cocktail id
 function getCocktail(alcoholic) {
   fetch(baseCocktailurl + "filter.php?a=" + alcoholic)
@@ -30,7 +30,7 @@ function getCocktailInformation(drinkId) {
         ingredientMeasurements: [],
         ingredients: [],
         steps: drink.strInstructions,
-        imgSrc: drink.strDrinkThumb
+        imgSrc: drink.strDrinkThumb,
       };
       //gets list of drink ingredents
       for (let i = 1; i <= 15; i++) {
@@ -50,21 +50,35 @@ function getCocktailInformation(drinkId) {
     });
 }
 
-//executed on button click. 
+//executed on button click.
 //value of Alcoholic or Non_Alcoholic should be passed in
 getCocktail("Non_Alcoholic");
 
 //meal api functions
 
-function getFoodItemId(type){
-    fetch(baseMealUrl + 'filter.php?c=' + type)
-    .then(function(response){
-        return response.json()
+function getFoodItemId(type) {
+  //fetches data for if type is entered
+  fetch(baseMealUrl + "filter.php?c=" + type)
+    .then(function (response) {
+      return response.json();
     })
-    .then(function (data){
-        var item = data.meals[Math.floor(Math.random() * data.meals.length)]
-        console.log(item)
-    })
+    .then(function (data) {
+      if (data.meals) {
+        var item = data.meals[Math.floor(Math.random() * data.meals.length)];
+        console.log(item.strMeal);
+      } else {
+        //fetches data for if area is entered
+        fetch(baseMealUrl + "filter.php?a=" + type)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            var item =
+              data.meals[Math.floor(Math.random() * data.meals.length)];
+            console.log(item.strMeal);
+          });
+      }
+    });
 }
 
-getFoodItemId("Seafood")
+getFoodItemId("Seafood");
