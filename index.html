@@ -9,119 +9,141 @@
     <title>Meal Planner</title>
 </head>
 <body>
+
+   
+
     <header>
         <h1>Random Meal Generator!</h1>
     </header>
     <figure id="hero-image"></figure>
-
-    <section id="search-saved-container">
-        <div id="search-container"></div>
-        <div id="saved-meals-container"></div>
-    </section>
-
-<!-- main course dropdown menu-->
-    <div class="dropdown is-hoverable">
-        <div class="dropdown-trigger">
-          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-            <span>Select Dinner Option</span>
-            <span class="icon is-small">
-              <i class="fas fa-angle-down" aria-hidden="true"></i>
-            </span>
-          </button>
-        </div>
-        <div class="dropdown-menu" id="dropdown-menu" role="menu">
-          <div class="dropdown-content">
-            <a class="dropdown-item">
-                <b>Pick for me!</b>
-            </a>
-            <hr class="dropdown-divider">
-            <a href="#" class="dropdown-item">
-              <b>By Category</b>
-            </a>
-            <a href="#" class="dropdown-item">
-                Beef
-            </a>
-            <a href="#" class="dropdown-item">
-                Chicken
-            </a>
-            <a href="#" class="dropdown-item">
-                Pork
-            </a>
-            <a href="#" class="dropdown-item">
-                Seafood
-            </a>
-            <a href="#" class="dropdown-item">
-                Vegan
-            </a>
-            <a href="#" class="dropdown-item">
-                Vegetarian
-            </a>
-            <hr class="dropdown-divider">
-            <a href="#" class="dropdown-item">
-                <b>By Cuisine</b>
-            </a>
-            <a href="#" class="dropdown-item">
-                American
-            </a>
-            <a href="#" class="dropdown-item">
-                Chinese
-            </a>
-            <a href="#" class="dropdown-item">
-                French
-            </a>
-            <a href="#" class="dropdown-item">
-                Greek
-            </a>
-            <a href="#" class="dropdown-item">
-                Indian
-            </a>
-            <a href="#" class="dropdown-item">
-                Italian
-            </a>
-            <a href="#" class="dropdown-item">
-                Jamaican
-            </a>
-            <a href="#" class="dropdown-item">
-                Japanese
-            </a>
-            <a href="#" class="dropdown-item">
-                Mexican
-            </a>
-            <a href="#" class="dropdown-item">
-                Thai
-            </a>
-          </div>
-        </div>
-      </div>
-
-<!-- Dessert dropdown menu-->
-    <div class="dropdown is-hoverable">
-        <div class="dropdown-trigger">
-          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-            <span>Select Drink Option</span>
-            <span class="icon is-small">
-              <i class="fas fa-angle-down" aria-hidden="true"></i>
-            </span>
-          </button>
-        </div>
-        <div class="dropdown-menu" id="dropdown-menu" role="menu">
-          <div class="dropdown-content">
-            <a href="#" class="dropdown-item">
-                Alcoholic
-            </a>
-            <a href="#" class="dropdown-item">
-                Non-Alcoholic
-            </a>
-          </div>
-        </div>
-    </div>
     
+    <main class="columns">
+
+        <section id="search-saved-container" class="column is-one-quarter">
+            <div class="dropdown">
+                <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+                <div class="dropdown-content">
+                    <a class="dropdown-item">
+                        <b>Pick for me!</b>
+                    </a>
+                    <hr class="dropdown-divider">
+                    <a href="#" class="dropdown-item">
+                      <b>By Category</b>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        Beef
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        Chicken
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        Pork
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        Seafood
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        Vegan
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        Vegetarian
+                    </a>
+                    <hr class="dropdown-divider">
+                    <a href="#" class="dropdown-item">
+                        <b>By Cuisine</b>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        American
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        Chinese
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        French
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        Greek
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        Indian
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        Italian
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        Jamaican
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        Japanese
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        Mexican
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        Thai
+                    </a>
+                  </div>
+              </div>
+              <div class="dropdown is-hoverable">
+                <div class="dropdown-trigger">
+                  <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                    <span>Select Drink Option</span>
+                    <span class="icon is-small">
+                      <i class="fas fa-angle-down" aria-hidden="true"></i>
+                    </span>
+                  </button>
+                </div>
+                <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                  <div class="dropdown-content">
+                    <a href="#" class="dropdown-item">
+                        Alcoholic
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        Non-Alcoholic
+                    </a>
+                  </div>
+                </div>
+            </div>
+            <div id="search-container">search</div>
+            <div id="saved-meals-container">saved</div>
+        </section>
     
-    <main>
-        <div id="dinner-container" class="recipe-container"></div>
-        <div id="dessert-container" class="recipe-container"></div>
-        <div id="cocktail-container" class="recipe-container"></div>
+        
+
+        <section id="recipes-container" class="column is-three-quarters">
+            <div id="dinner-container" class="recipe-container card">
+                <div class="card-header">Recipe Title</div>
+                <div class="card-image">
+                    <figure>
+                        <img src="https://www.placecage.com/200/300" alt="nic cage with flowy hair">
+                    </figure>
+                </div>
+                <div class="card-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </div>
+            </div>
+            <div id="dessert-container" class="recipe-container card">
+                <div class="card-header">Recipe Title</div>
+                <div class="card-image">
+                    <figure>
+                        <img src="https://www.placecage.com/200/300" alt="nic cage with flowy hair">
+                    </figure>
+                </div>
+                <div class="card-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </div>
+            </div>
+            <div id="cocktail-container" class="recipe-container card">
+                <div class="card-header">Recipe Title</div>
+                <div class="card-image">
+                    <figure>
+                        <img src="https://www.placecage.com/200/300" alt="nic cage with flowy hair">
+                    </figure>
+                </div>
+                <div class="card-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </div>
+            </div>
+        </section>
     </main>
+
 
     <footer></footer>
     <script src="./assets/js/script.js"></script>
