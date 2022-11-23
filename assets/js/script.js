@@ -27,6 +27,7 @@ function getCocktailInformation(drinkId) {
         name: drink.strDrink,
         ingredientMeasurements: [],
         ingredients: [],
+        steps: drink.strInstructions
       };
       //gets list of drink ingredents
       for (let i = 1; i <= 15; i++) {
