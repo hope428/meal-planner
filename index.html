@@ -9,17 +9,22 @@
     <title>Meal Planner</title>
 </head>
 <body>
-
-   
-
-    <header>
-        <h1>Random Meal Generator!</h1>
+    <header class="hero is-info">
+        <div class="hero-body"><h1 class="title">Random Meal Generator</h1>
+            <h2 class="subtitle">Can't figure out what to make for dinner? Let the generator decide!</h2>
+        </div>
+        
     </header>
-    <figure id="hero-image"></figure>
     
     <main class="columns">
 
         <section id="search-saved-container" class="column is-one-quarter">
+            <div id="search-container">
+                <h3 class="title is-5 px-2">Select Categories</h3>
+            </div>
+            <div id="saved-meals-container">
+                <h3 class="title is-5 px-2">Saved Recipes</h3>
+            </div>
             <div class="dropdown">
                 <button onclick="myFunction()" class="dropbtn">Dropdown</button>
                 <div class="dropdown-content">
@@ -111,12 +116,16 @@
         
 
         <section id="recipes-container" class="column is-three-quarters">
+            <!-- <h3 class="title is-5">Your Meal</h3>
+            
             <div id="dinner-container" class="recipe-container card">
-                <div class="card-header">Recipe Title</div>
+                <div id="dinner-title" class="card-header">Recipe Title</div>
                 <div class="card-image">
-                    <figure>
+                    <figure id="dinner-img">
                         <img src="https://www.placecage.com/200/300" alt="nic cage with flowy hair">
                     </figure>
+                </div>
+                <div id="dinner-ingredients" class="columns">
                 </div>
                 <div class="card-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </div>
@@ -140,7 +149,7 @@
                 </div>
                 <div class="card-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </div>
-            </div>
+            </div> -->
         </section>
     </main>
 
