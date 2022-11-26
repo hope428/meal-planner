@@ -51,6 +51,7 @@ function getCocktailInformation(drinkId) {
         }
       }
       //call render function with (drinkObj) as parameter
+      renderCocktailRecipe(drinkObj);
       console.log(drinkObj);
     });
 }
@@ -118,16 +119,14 @@ function getFoodObject(foodItemId) {
       }
 
       //call render function with (foodObj) as parameter
-      renderRecipes(foodObj);
+      renderDinnerRecipe(foodObj);
       console.log(foodObj);
     });
 }
 
-//test function call. should execute on button click
-// getFoodItemId("Seafood");
 
-// to create elements and render to page
-function renderRecipes(foodObj) {
+// function to create dinner elements and render to page
+function renderDinnerRecipe(foodObj) {
   var recipesDisplay = document.getElementById("recipes-container");
   recipesDisplay.innerHTML = ""
 
@@ -143,7 +142,7 @@ function renderRecipes(foodObj) {
 
   var dinnerTitle = document.createElement("div");
   dinnerTitle.classList.add("card-header");
-  dinnerTitle.textContent = "Dinner Name";
+  dinnerTitle.textContent = foodObj.name;
   dinnerContainer.append(dinnerTitle);
 
   // dinner image section
@@ -179,6 +178,55 @@ function renderRecipes(foodObj) {
   dinnerSteps.textContent = foodObj.steps;
   dinnerContainer.append(dinnerSteps);
 }
+
+// function to create cocktail elements and render to page
+function renderCocktailRecipe(drinkObj) {
+  var recipesDisplay = document.getElementById("recipes-container");
+
+  // cocktail card
+  var drinkContainer = document.createElement("div");
+  drinkContainer.classList.add("recipe-container", "card");
+  recipesDisplay.append(drinkContainer);
+
+  var drinkTitle = document.createElement("div");
+  drinkTitle.classList.add("card-header");
+  drinkTitle.textContent = drinkObj.name;
+  drinkContainer.append(drinkTitle);
+
+  // cocktail image section
+  var drinkCardImgContainer = document.createElement("div");
+  drinkCardImgContainer.classList.add("card-image");
+  drinkContainer.append(drinkCardImgContainer);
+
+  var drinkCardImgFigure = document.createElement("figure");
+  drinkCardImgFigure.classList.add("drink-img");
+  drinkCardImgContainer.append(drinkCardImgFigure);
+  // actual image
+  var drinkCardImg = document.createElement("img");
+  drinkCardImg.setAttribute("src", drinkObj.imgSrc);
+  drinkCardImg.setAttribute("alt", "A picture of the recipe");
+  drinkCardImgFigure.append(drinkCardImg);
+
+  // cocktail recipe section
+  var drinkIngredientsContainer = document.createElement("div");
+  drinkIngredientsContainer.classList.add("recipe-container", "columns");
+  drinkContainer.append(drinkIngredientsContainer);
+  // ingredients
+  var drinkIngMeasurements = document.createElement("div");
+  drinkIngMeasurements.classList.add("column", "is-one-third");
+  drinkIngMeasurements.textContent = drinkObj.ingredientMeasurements.join("");
+  drinkIngredientsContainer.append(drinkIngMeasurements);
+  var drinkIngItems = document.createElement("div");
+  drinkIngItems.classList.add("column", "is-two-thirds");
+  drinkIngItems.textContent = drinkObj.ingredients.join("\n");
+  drinkIngredientsContainer.append(drinkIngItems);
+  // recipe steps
+  var drinkSteps = document.createElement("div");
+  drinkSteps.classList.add("card-content");
+  drinkSteps.textContent = drinkObj.steps;
+  drinkContainer.append(drinkSteps);
+}
+
 
 generateBtn.addEventListener('click', function(){
   getFoodItemId(category.value)
