@@ -1,5 +1,6 @@
 var baseCocktailurl = "https://www.thecocktaildb.com/api/json/v1/1/";
 var baseMealUrl = "https://www.themealdb.com/api/json/v1/1/";
+var category = document.getElementById('category-select')
 
 //cocktail api functions
 // ---------------------- //
