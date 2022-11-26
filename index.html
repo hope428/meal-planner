@@ -1,22 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
     <link rel="stylesheet" href="./assets/css/styles.css" />
     <title>Meal Planner</title>
-</head>
-<body>
+  </head>
+  <body>
     <header class="hero is-info">
-        <div class="hero-body"><h1 class="title">Random Meal Generator</h1>
-            <h2 class="subtitle">Can't figure out what to make for dinner? Let the generator decide!</h2>
-        </div>
-        
+      <div class="hero-body">
+        <h1 class="title">Random Meal Generator</h1>
+        <h2 class="subtitle">
+          Can't figure out what to make for dinner? Let the generator decide!
+        </h2>
+      </div>
     </header>
-    
+
     <main class="columns">
+      <section id="search-saved-container" class="column is-one-quarter">
+        <div id="search-container">
+          <h3 class="title is-5 px-2">Select Categories</h3>
+        </div>
+        <div id="saved-meals-container">
+          <h3 class="title is-5 px-2">Saved Recipes</h3>
+        </div>
+        <div class="select">
+          <select id="category-select">
+            <optgroup label="By Category">
+              <option value="beef" class="dropdown-item">Beef</option>
+              <option value="chicken" class="dropdown-item">Chicken</option>
+              <option value="pork" class="dropdown-item">Pork</option>
+              <option value="seafood" class="dropdown-item">Seafood</option>
+              <option value="vegan" class="dropdown-item">Vegan</option>
+              <option value="vegetarian" class="dropdown-item">Vegetarian</option>
+            </optgroup>
+            <optgroup label="By Cuisine">
+              <option value="American" class="dropdown-item">American</option>
+              <option value="Chinese" class="dropdown-item">Chinese</option>
+              <option value="French" class="dropdown-item">French</option>
+              <option value="Greek" class="dropdown-item">Greek</option>
+              <option value="Indian" class="dropdown-item">Indian</option>
+              <option value="Italian" class="dropdown-item">Italian</option>
+              <option value="Jamaican" class="dropdown-item">Jamaican</option>
+              <option value="Japanese" class="dropdown-item">Japanese</option>
+              <option value="Mexican" class="dropdown-item">Mexican</option>
+              <option value="Thai" class="dropdown-item">Thai</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="select">
+            <select id="alcohol-select">
+                <option value="Alcoholic">Alcoholic</option>
+                <option value="Non_Alcoholic">Non Alcoholic</option>
+            </select>
+        </div>
+        <button id="generate">Get my meal!</button>
+        <div id="saved-meals-container">saved</div>
+      </section>
 
         <section id="search-saved-container" class="column is-one-quarter">
             <div id="search-container">
@@ -119,8 +164,7 @@
         </section>
     </main>
 
-
     <footer></footer>
     <script src="./assets/js/script.js"></script>
-</body>
+  </body>
 </html>

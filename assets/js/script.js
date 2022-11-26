@@ -1,5 +1,8 @@
 var baseCocktailurl = "https://www.thecocktaildb.com/api/json/v1/1/";
 var baseMealUrl = "https://www.themealdb.com/api/json/v1/1/";
+var category = document.getElementById("category-select");
+var drinkCategory = document.getElementById("alcohol-select")
+var generateBtn = document.getElementById("generate")
 
 //cocktail api functions
 // ---------------------- //
@@ -52,9 +55,6 @@ function getCocktailInformation(drinkId) {
     });
 }
 
-//executed on button click.
-//value of Alcoholic or Non_Alcoholic should be passed in
-getCocktail("Non_Alcoholic");
 
 //meal api functions
 // ---------------------- //
@@ -80,7 +80,7 @@ function getFoodItemId(type) {
           .then(function (data) {
             var item =
               data.meals[Math.floor(Math.random() * data.meals.length)];
-            console.log(item.strMeal);
+              getFoodObject(item.idMeal)
           });
       }
     });
@@ -118,17 +118,18 @@ function getFoodObject(foodItemId) {
       }
 
       //call render function with (foodObj) as parameter
-      renderRecipes(foodObj)
+      renderRecipes(foodObj);
       console.log(foodObj);
     });
 }
 
 //test function call. should execute on button click
-getFoodItemId("Seafood");
+// getFoodItemId("Seafood");
 
 // to create elements and render to page
 function renderRecipes(foodObj) {
   var recipesDisplay = document.getElementById("recipes-container");
+  recipesDisplay.innerHTML = ""
 
   var recipesHeader = document.createElement("h3");
   recipesHeader.classList.add("title", "is-5");
@@ -166,16 +167,20 @@ function renderRecipes(foodObj) {
   // ingredients
   var ingMeasurements = document.createElement("div");
   ingMeasurements.classList.add("column", "is-one-third");
-  ingMeasurements.textContent = foodObj.ingredientMeasurements.join('');
+  ingMeasurements.textContent = foodObj.ingredientMeasurements.join("");
   ingredientsContainer.append(ingMeasurements);
   var ingItems = document.createElement("div");
   ingItems.classList.add("column", "is-two-thirds");
-  ingItems.textContent = foodObj.ingredients.join('\n');
+  ingItems.textContent = foodObj.ingredients.join("\n");
   ingredientsContainer.append(ingItems);
   // recipe steps
   var dinnerSteps = document.createElement("div");
   dinnerSteps.classList.add("card-content");
-  dinnerSteps.textContent = foodObj.steps
+  dinnerSteps.textContent = foodObj.steps;
   dinnerContainer.append(dinnerSteps);
 }
-renderRecipes();
+
+generateBtn.addEventListener('click', function(){
+  getFoodItemId(category.value)
+  getCocktail(drinkCategory.value)
+})
