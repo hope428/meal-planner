@@ -1,6 +1,7 @@
 var baseCocktailurl = "https://www.thecocktaildb.com/api/json/v1/1/";
 var baseMealUrl = "https://www.themealdb.com/api/json/v1/1/";
 var category = document.getElementById("category-select");
+var drinkCategory = document.getElementById("alcohol-select")
 var generateBtn = document.getElementById("generate")
 
 //cocktail api functions
@@ -54,9 +55,6 @@ function getCocktailInformation(drinkId) {
     });
 }
 
-//executed on button click.
-//value of Alcoholic or Non_Alcoholic should be passed in
-getCocktail("Non_Alcoholic");
 
 //meal api functions
 // ---------------------- //
@@ -184,4 +182,5 @@ function renderRecipes(foodObj) {
 
 generateBtn.addEventListener('click', function(){
   getFoodItemId(category.value)
+  getCocktail(drinkCategory.value)
 })
