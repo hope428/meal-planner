@@ -128,7 +128,6 @@ function getFoodObject(foodItemId) {
 // function to create dinner elements and render to page
 function renderDinnerRecipe(foodObj) {
   var recipesDisplay = document.getElementById("recipes-container");
-  recipesDisplay.innerHTML = ""
 
   var recipesHeader = document.createElement("h3");
   recipesHeader.classList.add("title", "is-5");
@@ -229,6 +228,8 @@ function renderCocktailRecipe(drinkObj) {
 
 
 generateBtn.addEventListener('click', function(){
+  var recipesDisplay = document.getElementById("recipes-container");
+  recipesDisplay.innerHTML = ""
   getFoodItemId(category.value)
   getCocktail(drinkCategory.value)
 })
