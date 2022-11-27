@@ -166,12 +166,12 @@ function renderDinnerRecipe(foodObj) {
   // ingredients
   var ingMeasurements = document.createElement("div");
   ingMeasurements.classList.add("column", "is-one-third");
-  ingMeasurements.textContent = foodObj.ingredientMeasurements.join("");
+  for(let i = 0; i < foodObj.ingredients.length; i++){
+    var li = document.createElement('li')
+    li.textContent = foodObj.ingredientMeasurements[i] + " " + foodObj.ingredients[i]
+    ingMeasurements.append(li)
+  }
   ingredientsContainer.append(ingMeasurements);
-  var ingItems = document.createElement("div");
-  ingItems.classList.add("column", "is-two-thirds");
-  ingItems.textContent = foodObj.ingredients.join("\n");
-  ingredientsContainer.append(ingItems);
   // recipe steps
   var dinnerSteps = document.createElement("div");
   dinnerSteps.classList.add("card-content");
