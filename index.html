@@ -11,59 +11,71 @@
 </head>
 
 <body>
-  <header class="hero is-info">
+  <header id="hero-header" class="hero is-link">
     <div class="hero-body">
       <h1 class="title">Random Meal Generator</h1>
       <h2 class="subtitle">
-        Can't figure out what to make for dinner? Let the generator decide!
+        Can't figure out what to make for dinner? Let the generator decide...
       </h2>
     </div>
   </header>
 
   <main class="columns">
     <section id="search-saved-container" class="column is-one-quarter">
-      <div id="search-container">
-        <h3 class="title is-5 px-2">Select Categories</h3>
+      <div id="search-container" class="panel is-danger">
+        <p class="panel-heading">Select Categories</p>
+        <div class="panel-block">
+          <div class="select">
+            <select id="category-select">
+              <optgroup label="By Category">
+                <option value="beef" class="dropdown-item">Beef</option>
+                <option value="chicken" class="dropdown-item">Chicken</option>
+                <option value="pork" class="dropdown-item">Pork</option>
+                <option value="seafood" class="dropdown-item">Seafood</option>
+                <option value="vegan" class="dropdown-item">Vegan</option>
+                <option value="vegetarian" class="dropdown-item">Vegetarian</option>
+              </optgroup>
+              <optgroup label="By Cuisine">
+                <option value="American" class="dropdown-item">American</option>
+                <option value="Chinese" class="dropdown-item">Chinese</option>
+                <option value="French" class="dropdown-item">French</option>
+                <option value="Greek" class="dropdown-item">Greek</option>
+                <option value="Indian" class="dropdown-item">Indian</option>
+                <option value="Italian" class="dropdown-item">Italian</option>
+                <option value="Jamaican" class="dropdown-item">Jamaican</option>
+                <option value="Japanese" class="dropdown-item">Japanese</option>
+                <option value="Mexican" class="dropdown-item">Mexican</option>
+                <option value="Thai" class="dropdown-item">Thai</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+        <div class="panel-block">
+          <div class="select">
+            <select id="alcohol-select">
+              <option value="Alcoholic" class="dropdown-item">Alcoholic</option>
+              <option value="Non_Alcoholic" class="dropdown-item">Non Alcoholic</option>
+            </select>
+          </div>
+        </div>
+        <div class="panel-block">
+          <button id="generate" class="button is-warning">Get my meal!</button>
+        </div>
       </div>
-      <div id="saved-meals-container">
-        <h3 class="title is-5 px-2">Saved Recipes</h3>
+
+      <div id="saved-meals-container" class="panel is-danger">
+        <p class="panel-heading">Saved Recipes</p>
       </div>
-      <div class="select">
-        <select id="category-select">
-          <optgroup label="By Category">
-            <option value="beef" class="dropdown-item">Beef</option>
-            <option value="chicken" class="dropdown-item">Chicken</option>
-            <option value="pork" class="dropdown-item">Pork</option>
-            <option value="seafood" class="dropdown-item">Seafood</option>
-            <option value="vegan" class="dropdown-item">Vegan</option>
-            <option value="vegetarian" class="dropdown-item">Vegetarian</option>
-          </optgroup>
-          <optgroup label="By Cuisine">
-            <option value="American" class="dropdown-item">American</option>
-            <option value="Chinese" class="dropdown-item">Chinese</option>
-            <option value="French" class="dropdown-item">French</option>
-            <option value="Greek" class="dropdown-item">Greek</option>
-            <option value="Indian" class="dropdown-item">Indian</option>
-            <option value="Italian" class="dropdown-item">Italian</option>
-            <option value="Jamaican" class="dropdown-item">Jamaican</option>
-            <option value="Japanese" class="dropdown-item">Japanese</option>
-            <option value="Mexican" class="dropdown-item">Mexican</option>
-            <option value="Thai" class="dropdown-item">Thai</option>
-          </optgroup>
-        </select>
-      </div>
-      <div class="select">
-        <select id="alcohol-select">
-          <option value="Alcoholic">Alcoholic</option>
-          <option value="Non_Alcoholic">Non Alcoholic</option>
-        </select>
-      </div>
-      <button id="generate">Get my meal!</button>
-      <div id="saved-meals-container">saved</div>
+
     </section>
 
     <section id="recipes-container" class="column is-three-quarters">
+      <figure>
+        <img src="./assets/images/brooke-lark-_v3fy536vpk-unsplash.jpg"
+          alt="Photo of assorted cheeses, fruits, herbs, and snacks">
+      </figure>
     </section>
+
   </main>
 
   <footer></footer>
