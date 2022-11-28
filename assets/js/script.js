@@ -228,43 +228,42 @@ function renderDinnerRecipe(foodObj) {
   dinnerSteps.classList.add("card-content");
   dinnerSteps.textContent = foodObj.steps;
   dinnerContainer.append(dinnerSteps);
+  // Local Storage
+  function renderFavorites() {
+    savedMeals.innerHTML = "";
+    var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
+    if (currentFavorites) {
+      for (var i = 0; i < currentFavorites.length; i++) {
+        var favorite = currentFavorites[i];
+        console.log(favorite);
 
-}
-// Local Storage
-function renderFavorites() {
-  savedMeals.innerHTML = ""
-  var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
-  if (currentFavorites) {
-    for (var i = 0; i < currentFavorites.length; i++) {
-      var favorite = currentFavorites[i];
-      console.log(favorite)
+        var li = document.createElement("li");
+        li.setAttribute("favorites", i);
 
-      var li = document.createElement("li");
-      li.setAttribute("favorites", i);
+        var button = document.createElement("button");
+        button.classList.add("button", "is-white");
+        button.textContent = favorite.name;
 
-      var button = document.createElement("button");
-      button.classList.add("button", "is-white");
-      button.textContent = favorite.name;
-
-      li.appendChild(button);
-      savedMeals.appendChild(li);
+        li.appendChild(button);
+        savedMeals.appendChild(li);
+      }
     }
   }
-}
 
-function init() {
-  var storedFavorites = JSON.parse(localStorage.getItem("favorites"));
-  if (storedFavorites !== null) {
-    renderFavorites()
+  function init() {
+    var storedFavorites = JSON.parse(localStorage.getItem("favorites"));
+    if (storedFavorites !== null) {
+      renderFavorites();
+    }
   }
-}
 
-function storeFavorites() {
-  favorites.push(foodObj);
-  localStorage.setItem("favorites", JSON.stringify(favorites));
-}
+  function storeFavorites() {
+    favorites.push(foodObj);
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }
 
-init()
+  init();
+}
 
 // function to create cocktail elements and render to page
 function renderCocktailRecipe(drinkObj) {
