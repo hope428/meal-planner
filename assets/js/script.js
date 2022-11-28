@@ -199,6 +199,7 @@ function renderDinnerRecipe(foodObj) {
         li.setAttribute("favorites", i);
 
         var button = document.createElement("button");
+        button.classList.add("button", "is-white")
         button.textContent = favorite.name;
 
         li.appendChild(button);
