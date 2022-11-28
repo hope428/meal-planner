@@ -1,9 +1,8 @@
 var baseCocktailurl = "https://www.thecocktaildb.com/api/json/v1/1/";
 var baseMealUrl = "https://www.themealdb.com/api/json/v1/1/";
 var category = document.getElementById("category-select");
-var drinkCategory = document.getElementById("alcohol-select")
-var generateBtn = document.getElementById("generate")
-
+var drinkCategory = document.getElementById("alcohol-select");
+var generateBtn = document.getElementById("generate");
 //cocktail api functions
 // ---------------------- //
 //gets random cocktail id
@@ -56,14 +55,12 @@ function getCocktailInformation(drinkId) {
     });
 }
 
-
 //meal api functions
 // ---------------------- //
 
 //dessert or main dish can be retrieved with this function
 //for dessert pass in "Dessert" as the type
 function getFoodItemId(type) {
-  //fetches data for if type is entered
   fetch(baseMealUrl + "filter.php?c=" + type)
     .then(function (response) {
       return response.json();
@@ -71,7 +68,7 @@ function getFoodItemId(type) {
     .then(function (data) {
       if (data.meals) {
         var item = data.meals[Math.floor(Math.random() * data.meals.length)];
-        getFoodObject(item.idMeal);
+        getFoodObject(item.idMeal, type);
       } else {
         //fetches data for if area is entered
         fetch(baseMealUrl + "filter.php?a=" + type)
@@ -81,13 +78,13 @@ function getFoodItemId(type) {
           .then(function (data) {
             var item =
               data.meals[Math.floor(Math.random() * data.meals.length)];
-              getFoodObject(item.idMeal)
+              getFoodObject(item.idMeal);
           });
       }
     });
 }
 
-//creates meal or dessert object from id
+//creates meal object from id
 function getFoodObject(foodItemId) {
   fetch(baseMealUrl + "lookup.php?i=" + foodItemId)
     .then(function (response) {
@@ -120,18 +117,65 @@ function getFoodObject(foodItemId) {
 
       //call render function with (foodObj) as parameter
       renderDinnerRecipe(foodObj);
-      console.log(foodObj);
     });
 }
 
+//dessert api functions
+function getDessertId() {
+  fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert')
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+        var item = data.meals[Math.floor(Math.random() * data.meals.length)];
+        getDessertObject(item.idMeal)
+        console.log(item.idMeal)
+    });
+}
+
+//creates dessert object from id
+function getDessertObject(dessertItemId) {
+  fetch(baseMealUrl + "lookup.php?i=" + dessertItemId)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      var food = data.meals[0];
+      var foodObj = {
+        id: food.idMeal,
+        name: food.strMeal,
+        ingredientMeasurements: [],
+        ingredients: [],
+        steps: food.strInstructions,
+        imgSrc: food.strMealThumb,
+      };
+      //get list of food ingredients
+      for (let i = 1; i <= 15; i++) {
+        var ingredient = "strIngredient" + i;
+        if (food[ingredient]) {
+          foodObj.ingredients.push(food[ingredient]);
+        }
+      }
+      //gets list of ingredient measurements
+      for (let i = 1; i <= 15; i++) {
+        var measurement = "strMeasure" + i;
+        if (food[measurement]) {
+          foodObj.ingredientMeasurements.push(food[measurement]);
+        }
+      }
+
+      //call render function with (foodObj) as parameter
+      console.log(foodObj)
+    });
+}
 
 // function to create dinner elements and render to page
 function renderDinnerRecipe(foodObj) {
-  // if (getFoodItemId("dessert")) {
-  //   var recipesDisplay = document.getElementById("dessert-recipe")
-  // }
-  // else {
-  var recipesDisplay = document.getElementById("dinner-recipe");
+  // console.log(foodObj.type)
+  // if (foodObj.type === "Dessert") {
+    var recipesDisplay = document.getElementById("dessert-recipe");
+  // } else {
+  //   var recipesDisplay = document.getElementById("dinner-recipe");
   // }
   // dinner card
   var dinnerContainer = document.createElement("div");
@@ -165,10 +209,11 @@ function renderDinnerRecipe(foodObj) {
   var ingMeasurements = document.createElement("div");
   var ingMeasurementsUl = document.createElement("ul");
   ingMeasurements.classList.add("column", "is-one-third", "px-5");
-  for(let i = 0; i < foodObj.ingredients.length; i++){
-    var li = document.createElement('li')
-    li.textContent = foodObj.ingredientMeasurements[i] + " " + foodObj.ingredients[i]
-    ingMeasurementsUl.append(li)
+  for (let i = 0; i < foodObj.ingredients.length; i++) {
+    var li = document.createElement("li");
+    li.textContent =
+      foodObj.ingredientMeasurements[i] + " " + foodObj.ingredients[i];
+    ingMeasurementsUl.append(li);
   }
   ingredientsContainer.append(ingMeasurements);
   ingMeasurements.append(ingMeasurementsUl);
@@ -212,16 +257,17 @@ function renderCocktailRecipe(drinkObj) {
   drinkIngredientsContainer.classList.add("recipe-container", "columns");
   drinkContainer.append(drinkIngredientsContainer);
   // ingredients
-    var drinkIngMeasurements = document.createElement("div");
-    var drinkIngMeasurementsUl = document.createElement("ul");
-    drinkIngMeasurements.classList.add("column", "is-one-third", "px-5");
-    for(let i = 0; i < drinkObj.ingredients.length; i++){
-      var li = document.createElement('li')
-      li.textContent = drinkObj.ingredientMeasurements[i] + " " + drinkObj.ingredients[i]
-      drinkIngMeasurementsUl.append(li)
-    }
-    drinkIngredientsContainer.append(drinkIngMeasurements);
-    drinkIngMeasurements.append(drinkIngMeasurementsUl);
+  var drinkIngMeasurements = document.createElement("div");
+  var drinkIngMeasurementsUl = document.createElement("ul");
+  drinkIngMeasurements.classList.add("column", "is-one-third", "px-5");
+  for (let i = 0; i < drinkObj.ingredients.length; i++) {
+    var li = document.createElement("li");
+    li.textContent =
+      drinkObj.ingredientMeasurements[i] + " " + drinkObj.ingredients[i];
+    drinkIngMeasurementsUl.append(li);
+  }
+  drinkIngredientsContainer.append(drinkIngMeasurements);
+  drinkIngMeasurements.append(drinkIngMeasurementsUl);
   // recipe steps
   var drinkSteps = document.createElement("div");
   drinkSteps.classList.add("card-content");
@@ -235,18 +281,18 @@ function resetRender() {
   var drinkDisplay = document.getElementById("drink-recipe");
   var recipesDisplay = document.getElementById("header-div");
   var loadImgDisplay = document.getElementById("load-image");
-  recipesDisplay.innerHTML = ""
-  dinnerDisplay.innerHTML = ""
-  dessertDisplay.innerHTML = ""
-  drinkDisplay.innerHTML = ""
-  loadImgDisplay.innerHTML = ""
+  recipesDisplay.innerHTML = "";
+  dinnerDisplay.innerHTML = "";
+  dessertDisplay.innerHTML = "";
+  drinkDisplay.innerHTML = "";
+  loadImgDisplay.innerHTML = "";
   var recipesHeader = document.createElement("h3");
   recipesHeader.classList.add("title", "is-5");
   recipesHeader.textContent = "Your Meal";
   recipesDisplay.append(recipesHeader);
 }
 
-generateBtn.addEventListener('click', function(){
+generateBtn.addEventListener("click", function () {
   // var dinnerDisplay = document.getElementById("dinner-recipe");
   // var dessertDisplay = document.getElementById("dessert-recipe");
   // var drinkDisplay = document.getElementById("drink-recipe");
@@ -265,4 +311,4 @@ generateBtn.addEventListener('click', function(){
   getFoodItemId(category.value);
   getFoodItemId("dessert");
   getCocktail(drinkCategory.value);
-})
+});
