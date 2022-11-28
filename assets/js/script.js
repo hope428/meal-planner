@@ -143,13 +143,13 @@ function renderDinnerRecipe(foodObj) {
   dinnerTitle.textContent = foodObj.name;
   dinnerContainer.append(dinnerTitle);
 
-  var favDinnerButton = document.createElement("button");
-  favDinnerButton.innerHTML = "Add to favorites";
-  document.body.appendChild(favDinnerButton);
+  // var favDinnerButton = document.createElement("button");
+  // favDinnerButton.innerHTML = "Add to favorites";
+  // document.body.appendChild(favDinnerButton);
 
-  favDinnerButton.onclick = function () {
-    storeFavorites();
-  };
+  // favDinnerButton.onclick = function () {
+  //   storeDinnerFavorites();
+  // };
 
   // dinner image section
   var cardImgContainer = document.createElement("div");
@@ -169,6 +169,10 @@ function renderDinnerRecipe(foodObj) {
   var ingredientsContainer = document.createElement("div");
   ingredientsContainer.classList.add("recipe-container", "columns");
   dinnerContainer.append(ingredientsContainer);
+  let btn = document.createElement("button");
+  btn.innerHTML = "Add to favorites";
+  btn.className = "button is-danger";
+  dinnerContainer.querySelector(".card-header").appendChild(btn);
   // ingredients
   var ingMeasurements = document.createElement("div");
   var ingMeasurementsUl = document.createElement("ul");
@@ -208,6 +212,8 @@ function renderDinnerRecipe(foodObj) {
     }
   }
 
+
+
   function init() {
     var storedFavorites = JSON.parse(localStorage.getItem("favorites"));
     if (storedFavorites !== null) {
@@ -215,8 +221,13 @@ function renderDinnerRecipe(foodObj) {
     renderFavorites();
   }
 
-  function storeFavorites() {
+  function storeDinnerFavorites() {
     favorites.push(foodObj);
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }
+
+  function storeDrinkFavorites() {
+    favorites.push(drinkObj);
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }
 
@@ -255,6 +266,13 @@ function renderCocktailRecipe(drinkObj) {
   var drinkIngredientsContainer = document.createElement("div");
   drinkIngredientsContainer.classList.add("recipe-container", "columns");
   drinkContainer.append(drinkIngredientsContainer);
+  
+  var btn = document.createElement("button");
+  btn.innerHTML = "Add to favorites";
+  btn.className = "button is-danger";
+  btn.setAttribute('id', "drink-fav-button");
+  drinkContainer.querySelector(".card-header").appendChild(btn);
+
   // ingredients
     var drinkIngMeasurements = document.createElement("div");
     var drinkIngMeasurementsUl = document.createElement("ul");
@@ -272,7 +290,6 @@ function renderCocktailRecipe(drinkObj) {
   drinkSteps.textContent = drinkObj.steps;
   drinkContainer.append(drinkSteps);
 }
-
 
 generateBtn.addEventListener('click', function(){
   var recipesDisplay = document.getElementById("recipes-container");
