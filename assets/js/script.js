@@ -6,6 +6,8 @@ var generateBtn = document.getElementById("generate");
 var favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 var savedMeals = document.getElementById("saved-meals-container");
 var foodObj;
+var dessertObj;
+var drinkObj;
 //cocktail api functions
 // ---------------------- //
 //gets random cocktail id
@@ -30,7 +32,7 @@ function getCocktailInformation(drinkId) {
     })
     .then(function (data) {
       var drink = data.drinks[0];
-      var drinkObj = {
+      drinkObj = {
         id: drink.idDrink,
         name: drink.strDrink,
         ingredientMeasurements: [],
@@ -54,7 +56,6 @@ function getCocktailInformation(drinkId) {
       }
       //call render function with (drinkObj) as parameter
       renderCocktailRecipe(drinkObj);
-      console.log(drinkObj);
     });
 }
 
@@ -95,7 +96,7 @@ function getFoodObject(foodItemId) {
     })
     .then(function (data) {
       var food = data.meals[0];
-      var foodObj = {
+      foodObj = {
         id: food.idMeal,
         name: food.strMeal,
         ingredientMeasurements: [],
@@ -145,7 +146,7 @@ function getDessertObject(dessertItemId) {
     })
     .then(function (data) {
       var food = data.meals[0];
-      var dessertObj = {
+      dessertObj = {
         id: food.idMeal,
         name: food.strMeal,
         ingredientMeasurements: [],
@@ -209,6 +210,7 @@ function renderDinnerRecipe(foodObj) {
   btn.className = "button is-danger";
   dinnerContainer.querySelector(".card-header").appendChild(btn);
   // ingredients
+  btn.addEventListener('click', storeDinnerFavorites)
   var ingMeasurements = document.createElement("div");
   var ingMeasurementsUl = document.createElement("ul");
   ingMeasurements.classList.add("column", "is-one-third", "px-5");
@@ -226,46 +228,50 @@ function renderDinnerRecipe(foodObj) {
   dinnerSteps.textContent = foodObj.steps;
   dinnerContainer.append(dinnerSteps);
   // Local Storage
-  function renderFavorites() {
-    savedMeals.innerHTML = "";
-    var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
-    if (currentFavorites) {
-      for (var i = 0; i < currentFavorites.length; i++) {
-        var favorite = currentFavorites[i];
-        console.log(favorite);
-
-        var li = document.createElement("li");
-        li.setAttribute("favorites", i);
-
-        var button = document.createElement("button");
-        button.classList.add("button", "is-white");
-        button.textContent = favorite.name;
-
-        li.appendChild(button);
-        savedMeals.appendChild(li);
-      }
-    }
-  }
-
-  function init() {
-    var storedFavorites = JSON.parse(localStorage.getItem("favorites"));
-    if (storedFavorites !== null) {
-      renderFavorites();
-    }
-  }
-
-  function storeDinnerFavorites() {
-    favorites.push(foodObj);
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }
-
-  function storeDrinkFavorites() {
-    favorites.push(drinkObj);
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }
-
-  init();
+  
 }
+
+function renderFavorites() {
+  savedMeals.innerHTML = "";
+  var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
+  if (currentFavorites) {
+    for (var i = 0; i < currentFavorites.length; i++) {
+      var favorite = currentFavorites[i];
+      console.log(favorite);
+
+      var li = document.createElement("li");
+      li.setAttribute("favorites", i);
+
+      var button = document.createElement("button");
+      button.classList.add("button", "is-white");
+      button.textContent = favorite.name;
+
+      li.appendChild(button);
+      savedMeals.appendChild(li);
+    }
+  }
+}
+
+function init() {
+  var storedFavorites = JSON.parse(localStorage.getItem("favorites"));
+  if (storedFavorites !== null) {
+    renderFavorites();
+  }
+}
+
+function storeDinnerFavorites() {
+  favorites.push(foodObj);
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+  init()
+}
+
+function storeDrinkFavorites() {
+  favorites.push(drinkObj);
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+  init()
+}
+
+init();
 
 
 function renderDessertRecipe(dessertObj) {
@@ -355,6 +361,8 @@ function renderCocktailRecipe(drinkObj) {
   btn.className = "button is-danger";
   btn.setAttribute("id", "drink-fav-button");
   drinkContainer.querySelector(".card-header").appendChild(btn);
+
+  btn.addEventListener('click', storeDrinkFavorites)
 
   // ingredients
   var drinkIngMeasurements = document.createElement("div");
