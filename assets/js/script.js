@@ -54,6 +54,7 @@ function getCocktailInformation(drinkId) {
         }
       }
       //call render function with (drinkObj) as parameter
+      renderCocktailRecipe(drinkObj);
       console.log(drinkObj);
     });
 }
@@ -122,23 +123,15 @@ function getFoodObject(foodItemId) {
 
       //call render function with (foodObj) as parameter
       // favorites.push(foodObj);
-      renderRecipes(foodObj);
+      renderDinnerRecipe(foodObj);
       console.log(foodObj);
     });
 }
 
-//test function call. should execute on button click
-// getFoodItemId("Seafood");
 
-// to create elements and render to page
-function renderRecipes(foodObj) {
+// function to create dinner elements and render to page
+function renderDinnerRecipe(foodObj) {
   var recipesDisplay = document.getElementById("recipes-container");
-  recipesDisplay.innerHTML = ""
-
-  var recipesHeader = document.createElement("h3");
-  recipesHeader.classList.add("title", "is-5");
-  recipesHeader.textContent = "Your Meal";
-  recipesDisplay.append(recipesHeader);
 
   // dinner card
   var dinnerContainer = document.createElement("div");
@@ -147,7 +140,7 @@ function renderRecipes(foodObj) {
 
   var dinnerTitle = document.createElement("div");
   dinnerTitle.classList.add("card-header");
-  dinnerTitle.textContent = "Dinner Name";
+  dinnerTitle.textContent = foodObj.name;
   dinnerContainer.append(dinnerTitle);
 
   var favDinnerButton = document.createElement("button");
@@ -178,13 +171,15 @@ function renderRecipes(foodObj) {
   dinnerContainer.append(ingredientsContainer);
   // ingredients
   var ingMeasurements = document.createElement("div");
-  ingMeasurements.classList.add("column", "is-one-third");
-  ingMeasurements.textContent = foodObj.ingredientMeasurements.join("");
+  var ingMeasurementsUl = document.createElement("ul");
+  ingMeasurements.classList.add("column", "is-one-third", "px-5");
+  for(let i = 0; i < foodObj.ingredients.length; i++){
+    var li = document.createElement('li')
+    li.textContent = foodObj.ingredientMeasurements[i] + " " + foodObj.ingredients[i]
+    ingMeasurementsUl.append(li)
+  }
   ingredientsContainer.append(ingMeasurements);
-  var ingItems = document.createElement("div");
-  ingItems.classList.add("column", "is-two-thirds");
-  ingItems.textContent = foodObj.ingredients.join("\n");
-  ingredientsContainer.append(ingItems);
+  ingMeasurements.append(ingMeasurementsUl);
   // recipe steps
   var dinnerSteps = document.createElement("div");
   dinnerSteps.classList.add("card-content");
@@ -227,7 +222,64 @@ function renderRecipes(foodObj) {
   init()
 }
 
-generateBtn.addEventListener('click', function () {
+// function to create cocktail elements and render to page
+function renderCocktailRecipe(drinkObj) {
+  var recipesDisplay = document.getElementById("recipes-container");
+
+  // cocktail card
+  var drinkContainer = document.createElement("div");
+  drinkContainer.classList.add("recipe-container", "card");
+  recipesDisplay.append(drinkContainer);
+
+  var drinkTitle = document.createElement("div");
+  drinkTitle.classList.add("card-header");
+  drinkTitle.textContent = drinkObj.name;
+  drinkContainer.append(drinkTitle);
+
+  // cocktail image section
+  var drinkCardImgContainer = document.createElement("div");
+  drinkCardImgContainer.classList.add("card-image");
+  drinkContainer.append(drinkCardImgContainer);
+
+  var drinkCardImgFigure = document.createElement("figure");
+  drinkCardImgFigure.classList.add("drink-img");
+  drinkCardImgContainer.append(drinkCardImgFigure);
+  // actual image
+  var drinkCardImg = document.createElement("img");
+  drinkCardImg.setAttribute("src", drinkObj.imgSrc);
+  drinkCardImg.setAttribute("alt", "A picture of the recipe");
+  drinkCardImgFigure.append(drinkCardImg);
+
+  // cocktail recipe section
+  var drinkIngredientsContainer = document.createElement("div");
+  drinkIngredientsContainer.classList.add("recipe-container", "columns");
+  drinkContainer.append(drinkIngredientsContainer);
+  // ingredients
+    var drinkIngMeasurements = document.createElement("div");
+    var drinkIngMeasurementsUl = document.createElement("ul");
+    drinkIngMeasurements.classList.add("column", "is-one-third", "px-5");
+    for(let i = 0; i < drinkObj.ingredients.length; i++){
+      var li = document.createElement('li')
+      li.textContent = drinkObj.ingredientMeasurements[i] + " " + drinkObj.ingredients[i]
+      drinkIngMeasurementsUl.append(li)
+    }
+    drinkIngredientsContainer.append(drinkIngMeasurements);
+    drinkIngMeasurements.append(drinkIngMeasurementsUl);
+  // recipe steps
+  var drinkSteps = document.createElement("div");
+  drinkSteps.classList.add("card-content");
+  drinkSteps.textContent = drinkObj.steps;
+  drinkContainer.append(drinkSteps);
+}
+
+
+generateBtn.addEventListener('click', function(){
+  var recipesDisplay = document.getElementById("recipes-container");
+  recipesDisplay.innerHTML = ""
+  var recipesHeader = document.createElement("h3");
+  recipesHeader.classList.add("title", "is-5");
+  recipesHeader.textContent = "Your Meal";
+  recipesDisplay.append(recipesHeader);
   getFoodItemId(category.value)
   getCocktail(drinkCategory.value)
 })
