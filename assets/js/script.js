@@ -1,8 +1,11 @@
 var baseCocktailurl = "https://www.thecocktaildb.com/api/json/v1/1/";
 var baseMealUrl = "https://www.themealdb.com/api/json/v1/1/";
 var category = document.getElementById("category-select");
-var drinkCategory = document.getElementById("alcohol-select")
-var generateBtn = document.getElementById("generate")
+var drinkCategory = document.getElementById("alcohol-select");
+var generateBtn = document.getElementById("generate");
+var favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+var savedMeals = document.getElementById('saved-meals-container');
+var foodObj;
 
 //cocktail api functions
 // ---------------------- //
@@ -80,7 +83,7 @@ function getFoodItemId(type) {
           .then(function (data) {
             var item =
               data.meals[Math.floor(Math.random() * data.meals.length)];
-              getFoodObject(item.idMeal)
+            getFoodObject(item.idMeal)
           });
       }
     });
@@ -118,6 +121,7 @@ function getFoodObject(foodItemId) {
       }
 
       //call render function with (foodObj) as parameter
+      // favorites.push(foodObj);
       renderRecipes(foodObj);
       console.log(foodObj);
     });
@@ -145,6 +149,14 @@ function renderRecipes(foodObj) {
   dinnerTitle.classList.add("card-header");
   dinnerTitle.textContent = "Dinner Name";
   dinnerContainer.append(dinnerTitle);
+
+  var favDinnerButton = document.createElement("button");
+  favDinnerButton.innerHTML = "Add to favorites";
+  document.body.appendChild(favDinnerButton);
+
+  favDinnerButton.onclick = function () {
+    storeFavorites();
+  };
 
   // dinner image section
   var cardImgContainer = document.createElement("div");
@@ -178,9 +190,44 @@ function renderRecipes(foodObj) {
   dinnerSteps.classList.add("card-content");
   dinnerSteps.textContent = foodObj.steps;
   dinnerContainer.append(dinnerSteps);
+
+  // Local Storage
+  function renderFavorites() {
+    savedMeals.innerHTML = "";
+    var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
+    if (currentFavorites) {
+      for (var i = 0; i < currentFavorites.length; i++) {
+        var favorite = currentFavorites[i];
+        console.log(favorite);
+
+        var li = document.createElement("li");
+        li.setAttribute("favorites", i);
+
+        var button = document.createElement("button");
+        button.textContent = favorite.name;
+
+        li.appendChild(button);
+        savedMeals.appendChild(li);
+      }
+    }
+  }
+
+  function init() {
+    var storedFavorites = JSON.parse(localStorage.getItem("favorites"));
+    if (storedFavorites !== null) {
+    }
+    renderFavorites();
+  }
+
+  function storeFavorites() {
+    favorites.push(foodObj);
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }
+
+  init()
 }
 
-generateBtn.addEventListener('click', function(){
+generateBtn.addEventListener('click', function () {
   getFoodItemId(category.value)
   getCocktail(drinkCategory.value)
 })
