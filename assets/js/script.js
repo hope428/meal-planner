@@ -1,11 +1,11 @@
 var baseCocktailurl = "https://www.thecocktaildb.com/api/json/v1/1/";
 var baseMealUrl = "https://www.themealdb.com/api/json/v1/1/";
 var category = document.getElementById("category-select");
-var drinkCategory = document.getElementById("alcohol-select");;
+var drinkCategory = document.getElementById("alcohol-select");
 var generateBtn = document.getElementById("generate");
 var favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-var savedMeals = document.getElementById('saved-meals-container');
-var foodObj;;
+var savedMeals = document.getElementById("saved-meals-container");
+var foodObj;
 //cocktail api functions
 // ---------------------- //
 //gets random cocktail id
@@ -81,7 +81,7 @@ function getFoodItemId(type) {
           .then(function (data) {
             var item =
               data.meals[Math.floor(Math.random() * data.meals.length)];
-            getFoodObject(item.idMeal)
+            getFoodObject(item.idMeal);
           });
       }
     });
@@ -126,14 +126,14 @@ function getFoodObject(foodItemId) {
 
 //dessert api functions
 function getDessertId() {
-  fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert')
+  fetch("https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert")
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-        var item = data.meals[Math.floor(Math.random() * data.meals.length)];
-        getDessertObject(item.idMeal)
-        console.log(item.idMeal)
+      var item = data.meals[Math.floor(Math.random() * data.meals.length)];
+      getDessertObject(item.idMeal);
+      console.log(item.idMeal);
     });
 }
 
@@ -169,19 +169,13 @@ function getDessertObject(dessertItemId) {
       }
 
       //call render function with (foodObj) as parameter
-      console.log(foodObj)
+      console.log(foodObj);
     });
 }
 
 // function to create dinner elements and render to page
 function renderDinnerRecipe(foodObj) {
-  // console.log(foodObj.type)
-  // if (foodObj.type === "Dessert") {
-    var recipesDisplay = document.getElementById("dessert-recipe");
-  // } else {
-  //   var recipesDisplay = document.getElementById("dinner-recipe");
-  // }
-  // dinner card
+  var recipesDisplay = document.getElementById("dessert-recipe");
   var dinnerContainer = document.createElement("div");
   dinnerContainer.classList.add("recipe-container", "card");
   recipesDisplay.append(dinnerContainer);
@@ -235,42 +229,43 @@ function renderDinnerRecipe(foodObj) {
   dinnerSteps.textContent = foodObj.steps;
   dinnerContainer.append(dinnerSteps);
 
-  // Local Storage
-  function renderFavorites() {
-    savedMeals.innerHTML = "";
-    var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
-    if (currentFavorites) {
-      for (var i = 0; i < currentFavorites.length; i++) {
-        var favorite = currentFavorites[i];
-        console.log(favorite);
-
-        var li = document.createElement("li");
-        li.setAttribute("favorites", i);
-
-        var button = document.createElement("button");
-        button.classList.add("button", "is-white")
-        button.textContent = favorite.name;
-
-        li.appendChild(button);
-        savedMeals.appendChild(li);
-      }
-    }
-  }
-
-  function init() {
-    var storedFavorites = JSON.parse(localStorage.getItem("favorites"));
-    if (storedFavorites !== null) {
-    }
-    renderFavorites();
-  }
-
-  function storeFavorites() {
-    favorites.push(foodObj);
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }
-
-  init()
 }
+// Local Storage
+function renderFavorites() {
+
+  savedMeals.innerHTML = "";
+  var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
+  if (currentFavorites) {
+    for (var i = 0; i < currentFavorites.length; i++) {
+      var favorite = currentFavorites[i];
+      console.log(favorite);
+
+      var li = document.createElement("li");
+      li.setAttribute("favorites", i);
+
+      var button = document.createElement("button");
+      button.classList.add("button", "is-white");
+      button.textContent = favorite.name;
+
+      li.appendChild(button);
+      savedMeals.appendChild(li);
+    }
+  }
+}
+
+function init() {
+  var storedFavorites = JSON.parse(localStorage.getItem("favorites"));
+  if (storedFavorites !== null) {
+  }
+  renderFavorites()
+}
+
+function storeFavorites() {
+  favorites.push(foodObj);
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+}
+
+init()
 
 // function to create cocktail elements and render to page
 function renderCocktailRecipe(drinkObj) {
@@ -341,20 +336,6 @@ function resetRender() {
 }
 
 generateBtn.addEventListener("click", function () {
-  // var dinnerDisplay = document.getElementById("dinner-recipe");
-  // var dessertDisplay = document.getElementById("dessert-recipe");
-  // var drinkDisplay = document.getElementById("drink-recipe");
-  // var recipesDisplay = document.getElementById("header-div");
-  // var loadImgDisplay = document.getElementById("load-image");
-  // recipesDisplay.innerHTML = ""
-  // dinnerDisplay.innerHTML = ""
-  // dessertDisplay.innerHTML = ""
-  // drinkDisplay.innerHTML = ""
-  // loadImgDisplay.innerHTML = ""
-  // var recipesHeader = document.createElement("h3");
-  // recipesHeader.classList.add("title", "is-5");
-  // recipesHeader.textContent = "Your Meal";
-  // recipesDisplay.append(recipesHeader);
   resetRender();
   getFoodItemId(category.value);
   getFoodItemId("dessert");

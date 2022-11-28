@@ -1,3 +1,7 @@
+* {
+  font-family: 'Catamaran', sans-serif;
+}
+
 /* Dropdown Button */
 .dropbtn {
     background-color: #3498DB;
@@ -53,5 +57,10 @@
 
   .recipe-container {
     width: 90%;
+  }
+
+  #saved-meals-container li{
+    list-style-type: none;
+    text-align: left;
   }
 
