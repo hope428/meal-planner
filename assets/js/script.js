@@ -271,6 +271,12 @@ function storeDrinkFavorites() {
   init()
 }
 
+function storeDessertFavorites() {
+  favorites.push(dessertObj);
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+  init()
+}
+
 init();
 
 
@@ -285,6 +291,14 @@ function renderDessertRecipe(dessertObj) {
   dessertTitle.classList.add("card-header");
   dessertTitle.textContent = dessertObj.name;
   dessertContainer.append(dessertTitle);
+
+  var dessertBtn = document.createElement("button");
+  dessertBtn.innerHTML = "Add to favorites";
+  dessertBtn.className = "button is-danger";
+  dessertBtn.setAttribute("id", "dessert-fav-button");
+  dessertContainer.querySelector(".card-header").appendChild(dessertBtn);
+
+  dessertBtn.addEventListener('click', storeDessertFavorites)
 
   // dessert image section
   var cardImgContainer = document.createElement("div");
