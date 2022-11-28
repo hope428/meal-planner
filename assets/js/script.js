@@ -186,14 +186,6 @@ function renderDinnerRecipe(foodObj) {
   dinnerTitle.textContent = foodObj.name;
   dinnerContainer.append(dinnerTitle);
 
-  // var favDinnerButton = document.createElement("button");
-  // favDinnerButton.innerHTML = "Add to favorites";
-  // document.body.appendChild(favDinnerButton);
-
-  // favDinnerButton.onclick = function () {
-  //   storeDinnerFavorites();
-  // };
-
   // dinner image section
   var cardImgContainer = document.createElement("div");
   cardImgContainer.classList.add("card-image");
@@ -255,8 +247,6 @@ function renderDinnerRecipe(foodObj) {
     }
   }
 
-
-
   function init() {
     var storedFavorites = JSON.parse(localStorage.getItem("favorites"));
     if (storedFavorites !== null) {
@@ -274,7 +264,7 @@ function renderDinnerRecipe(foodObj) {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }
 
-  init()
+  init();
 }
 
 
@@ -359,11 +349,11 @@ function renderCocktailRecipe(drinkObj) {
   var drinkIngredientsContainer = document.createElement("div");
   drinkIngredientsContainer.classList.add("recipe-container", "columns");
   drinkContainer.append(drinkIngredientsContainer);
-  
+
   var btn = document.createElement("button");
   btn.innerHTML = "Add to favorites";
   btn.className = "button is-danger";
-  btn.setAttribute('id', "drink-fav-button");
+  btn.setAttribute("id", "drink-fav-button");
   drinkContainer.querySelector(".card-header").appendChild(btn);
 
   // ingredients
@@ -383,6 +373,84 @@ function renderCocktailRecipe(drinkObj) {
   drinkSteps.classList.add("card-content");
   drinkSteps.textContent = drinkObj.steps;
   drinkContainer.append(drinkSteps);
+}
+
+savedMeals.addEventListener("click", displayFavorite);
+
+function displayFavorite(event) {
+  if (event.target.matches("button")) {
+    var favorite = event.target.textContent;
+
+    fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=" + favorite)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        if (data.meals) {
+          var favorite = data.meals[0];
+          var favoriteObj = {
+            id: favorite.idMeal,
+            name: favorite.strMeal,
+            ingredientMeasurements: [],
+            ingredients: [],
+            steps: favorite.strInstructions,
+            imgSrc: favorite.strMealThumb,
+          };
+          //get list of food ingredients
+          for (let i = 1; i <= 15; i++) {
+            var ingredient = "strIngredient" + i;
+            if (favorite[ingredient]) {
+              favoriteObj.ingredients.push(favorite[ingredient]);
+            }
+          }
+          //gets list of ingredient measurements
+          for (let i = 1; i <= 15; i++) {
+            var measurement = "strMeasure" + i;
+            if (favorite[measurement]) {
+              favoriteObj.ingredientMeasurements.push(favorite[measurement]);
+            }
+          }
+        } else {
+          //if clicked object is not food, call drink api instead
+          fetch(
+            "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" +
+              favorite
+          )
+            .then(function (response) {
+              return response.json();
+            })
+            .then(function (data) {
+              var favorite = data.meals[0];
+              var favoriteObj = {
+                id: favorite.idMeal,
+                name: favorite.strMeal,
+                ingredientMeasurements: [],
+                ingredients: [],
+                steps: favorite.strInstructions,
+                imgSrc: favorite.strMealThumb,
+              };
+              //get list of drink ingredients
+              for (let i = 1; i <= 15; i++) {
+                var ingredient = "strIngredient" + i;
+                if (favorite[ingredient]) {
+                  favoriteObj.ingredients.push(favorite[ingredient]);
+                }
+              }
+              //gets list of ingredient measurements
+              for (let i = 1; i <= 15; i++) {
+                var measurement = "strMeasure" + i;
+                if (favorite[measurement]) {
+                  favoriteObj.ingredientMeasurements.push(
+                    favorite[measurement]
+                  );
+                }
+              }
+            });
+        }
+        resetRender()
+        renderDinnerRecipe(favoriteObj);
+      });
+  }
 }
 
 function resetRender() {
