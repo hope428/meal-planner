@@ -46,3 +46,12 @@
   #hero-header{
     margin-bottom: 2px;
   }
+
+  .card-image {
+    max-width: 25%;
+  }
+
+  .recipe-container {
+    width: 90%;
+  }
+
