@@ -145,7 +145,7 @@ function getDessertObject(dessertItemId) {
     })
     .then(function (data) {
       var food = data.meals[0];
-      var foodObj = {
+      var dessertObj = {
         id: food.idMeal,
         name: food.strMeal,
         ingredientMeasurements: [],
@@ -157,25 +157,26 @@ function getDessertObject(dessertItemId) {
       for (let i = 1; i <= 15; i++) {
         var ingredient = "strIngredient" + i;
         if (food[ingredient]) {
-          foodObj.ingredients.push(food[ingredient]);
+          dessertObj.ingredients.push(food[ingredient]);
         }
       }
       //gets list of ingredient measurements
       for (let i = 1; i <= 15; i++) {
         var measurement = "strMeasure" + i;
         if (food[measurement]) {
-          foodObj.ingredientMeasurements.push(food[measurement]);
+          dessertObj.ingredientMeasurements.push(food[measurement]);
         }
       }
 
-      //call render function with (foodObj) as parameter
-      console.log(foodObj);
+      //call render function with (dessertObj) as parameter
+      renderDessertRecipe(dessertObj);
+      console.log(dessertObj);
     });
 }
 
 // function to create dinner elements and render to page
 function renderDinnerRecipe(foodObj) {
-  var recipesDisplay = document.getElementById("dessert-recipe");
+  var recipesDisplay = document.getElementById("dinner-recipe");
   var dinnerContainer = document.createElement("div");
   dinnerContainer.classList.add("recipe-container", "card");
   recipesDisplay.append(dinnerContainer);
@@ -264,6 +265,56 @@ function renderDinnerRecipe(foodObj) {
   }
 
   init();
+}
+
+
+function renderDessertRecipe(dessertObj) {
+  var recipesDisplay = document.getElementById("dessert-recipe");
+  // dessert card
+  var dessertContainer = document.createElement("div");
+  dessertContainer.classList.add("recipe-container", "card");
+  recipesDisplay.append(dessertContainer);
+
+  var dessertTitle = document.createElement("div");
+  dessertTitle.classList.add("card-header");
+  dessertTitle.textContent = dessertObj.name;
+  dessertContainer.append(dessertTitle);
+
+  // dessert image section
+  var cardImgContainer = document.createElement("div");
+  cardImgContainer.classList.add("card-image");
+  dessertContainer.append(cardImgContainer);
+
+  var cardImgFigure = document.createElement("figure");
+  cardImgFigure.classList.add("dessert-img");
+  cardImgContainer.append(cardImgFigure);
+  // actual image
+  var cardImg = document.createElement("img");
+  cardImg.setAttribute("src", dessertObj.imgSrc);
+  cardImg.setAttribute("alt", "A picture of the recipe");
+  cardImgFigure.append(cardImg);
+
+  // dessert recipe section
+  var ingredientsContainer = document.createElement("div");
+  ingredientsContainer.classList.add("recipe-container", "columns");
+  dessertContainer.append(ingredientsContainer);
+  // ingredients
+  var ingMeasurements = document.createElement("div");
+  var ingMeasurementsUl = document.createElement("ul");
+  ingMeasurements.classList.add("column", "is-one-third", "px-5");
+  for (let i = 0; i < dessertObj.ingredients.length; i++) {
+    var li = document.createElement("li");
+    li.textContent =
+      dessertObj.ingredientMeasurements[i] + " " + dessertObj.ingredients[i];
+    ingMeasurementsUl.append(li);
+  }
+  ingredientsContainer.append(ingMeasurements);
+  ingMeasurements.append(ingMeasurementsUl);
+  // recipe steps
+  var dessertSteps = document.createElement("div");
+  dessertSteps.classList.add("card-content");
+  dessertSteps.textContent = dessertObj.steps;
+  dessertContainer.append(dessertSteps);
 }
 
 // function to create cocktail elements and render to page
@@ -422,6 +473,6 @@ function resetRender() {
 generateBtn.addEventListener("click", function () {
   resetRender();
   getFoodItemId(category.value);
-  getFoodItemId("dessert");
+  getDessertId();
   getCocktail(drinkCategory.value);
 });
