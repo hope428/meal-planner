@@ -232,13 +232,12 @@ function renderDinnerRecipe(foodObj) {
 }
 // Local Storage
 function renderFavorites() {
-
-  savedMeals.innerHTML = "";
+  savedMeals.innerHTML = ""
   var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
   if (currentFavorites) {
     for (var i = 0; i < currentFavorites.length; i++) {
       var favorite = currentFavorites[i];
-      console.log(favorite);
+      console.log(favorite)
 
       var li = document.createElement("li");
       li.setAttribute("favorites", i);
@@ -256,8 +255,8 @@ function renderFavorites() {
 function init() {
   var storedFavorites = JSON.parse(localStorage.getItem("favorites"));
   if (storedFavorites !== null) {
+    renderFavorites()
   }
-  renderFavorites()
 }
 
 function storeFavorites() {
