@@ -234,5 +234,6 @@ generateBtn.addEventListener('click', function(){
   recipesHeader.textContent = "Your Meal";
   recipesDisplay.append(recipesHeader);
   getFoodItemId(category.value)
+  getFoodItemId("Dessert")
   getCocktail(drinkCategory.value)
 })
