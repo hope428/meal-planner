@@ -1,8 +1,11 @@
 var baseCocktailurl = "https://www.thecocktaildb.com/api/json/v1/1/";
 var baseMealUrl = "https://www.themealdb.com/api/json/v1/1/";
 var category = document.getElementById("category-select");
-var drinkCategory = document.getElementById("alcohol-select");
+var drinkCategory = document.getElementById("alcohol-select");;
 var generateBtn = document.getElementById("generate");
+var favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+var savedMeals = document.getElementById('saved-meals-container');
+var foodObj;;
 //cocktail api functions
 // ---------------------- //
 //gets random cocktail id
@@ -78,7 +81,7 @@ function getFoodItemId(type) {
           .then(function (data) {
             var item =
               data.meals[Math.floor(Math.random() * data.meals.length)];
-              getFoodObject(item.idMeal);
+            getFoodObject(item.idMeal)
           });
       }
     });
@@ -116,6 +119,7 @@ function getFoodObject(foodItemId) {
       }
 
       //call render function with (foodObj) as parameter
+      // favorites.push(foodObj);
       renderDinnerRecipe(foodObj);
     });
 }
@@ -187,6 +191,14 @@ function renderDinnerRecipe(foodObj) {
   dinnerTitle.textContent = foodObj.name;
   dinnerContainer.append(dinnerTitle);
 
+  var favDinnerButton = document.createElement("button");
+  favDinnerButton.innerHTML = "Add to favorites";
+  document.body.appendChild(favDinnerButton);
+
+  favDinnerButton.onclick = function () {
+    storeFavorites();
+  };
+
   // dinner image section
   var cardImgContainer = document.createElement("div");
   cardImgContainer.classList.add("card-image");
@@ -222,6 +234,41 @@ function renderDinnerRecipe(foodObj) {
   dinnerSteps.classList.add("card-content");
   dinnerSteps.textContent = foodObj.steps;
   dinnerContainer.append(dinnerSteps);
+
+  // Local Storage
+  function renderFavorites() {
+    savedMeals.innerHTML = "";
+    var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
+    if (currentFavorites) {
+      for (var i = 0; i < currentFavorites.length; i++) {
+        var favorite = currentFavorites[i];
+        console.log(favorite);
+
+        var li = document.createElement("li");
+        li.setAttribute("favorites", i);
+
+        var button = document.createElement("button");
+        button.textContent = favorite.name;
+
+        li.appendChild(button);
+        savedMeals.appendChild(li);
+      }
+    }
+  }
+
+  function init() {
+    var storedFavorites = JSON.parse(localStorage.getItem("favorites"));
+    if (storedFavorites !== null) {
+    }
+    renderFavorites();
+  }
+
+  function storeFavorites() {
+    favorites.push(foodObj);
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }
+
+  init()
 }
 
 // function to create cocktail elements and render to page
