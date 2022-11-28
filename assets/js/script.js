@@ -335,30 +335,69 @@ function displayFavorite(event) {
         return response.json();
       })
       .then(function (data) {
-        var favorite = data.meals[0];
-        var favoriteObj = {
-          id: favorite.idMeal,
-          name: favorite.strMeal,
-          ingredientMeasurements: [],
-          ingredients: [],
-          steps: favorite.strInstructions,
-          imgSrc: favorite.strMealThumb,
-        };
-        //get list of food ingredients
-        for (let i = 1; i <= 15; i++) {
-          var ingredient = "strIngredient" + i;
-          if (favorite[ingredient]) {
-            favoriteObj.ingredients.push(favorite[ingredient]);
+        if (data.meals) {
+          var favorite = data.meals[0];
+          var favoriteObj = {
+            id: favorite.idMeal,
+            name: favorite.strMeal,
+            ingredientMeasurements: [],
+            ingredients: [],
+            steps: favorite.strInstructions,
+            imgSrc: favorite.strMealThumb,
+          };
+          //get list of food ingredients
+          for (let i = 1; i <= 15; i++) {
+            var ingredient = "strIngredient" + i;
+            if (favorite[ingredient]) {
+              favoriteObj.ingredients.push(favorite[ingredient]);
+            }
           }
-        }
-        //gets list of ingredient measurements
-        for (let i = 1; i <= 15; i++) {
-          var measurement = "strMeasure" + i;
-          if (favorite[measurement]) {
-            favoriteObj.ingredientMeasurements.push(favorite[measurement]);
+          //gets list of ingredient measurements
+          for (let i = 1; i <= 15; i++) {
+            var measurement = "strMeasure" + i;
+            if (favorite[measurement]) {
+              favoriteObj.ingredientMeasurements.push(favorite[measurement]);
+            }
           }
+        } else {
+          //if clicked object is not food, call drink api instead
+          fetch(
+            "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" +
+              favorite
+          )
+            .then(function (response) {
+              return response.json();
+            })
+            .then(function (data) {
+              var favorite = data.meals[0];
+              var favoriteObj = {
+                id: favorite.idMeal,
+                name: favorite.strMeal,
+                ingredientMeasurements: [],
+                ingredients: [],
+                steps: favorite.strInstructions,
+                imgSrc: favorite.strMealThumb,
+              };
+              //get list of drink ingredients
+              for (let i = 1; i <= 15; i++) {
+                var ingredient = "strIngredient" + i;
+                if (favorite[ingredient]) {
+                  favoriteObj.ingredients.push(favorite[ingredient]);
+                }
+              }
+              //gets list of ingredient measurements
+              for (let i = 1; i <= 15; i++) {
+                var measurement = "strMeasure" + i;
+                if (favorite[measurement]) {
+                  favoriteObj.ingredientMeasurements.push(
+                    favorite[measurement]
+                  );
+                }
+              }
+            });
         }
-        console.log(favorite)
+        resetRender()
+        renderDinnerRecipe(favoriteObj);
       });
   }
 }
