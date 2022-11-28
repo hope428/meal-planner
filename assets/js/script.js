@@ -127,8 +127,12 @@ function getFoodObject(foodItemId) {
 
 // function to create dinner elements and render to page
 function renderDinnerRecipe(foodObj) {
-  var recipesDisplay = document.getElementById("recipes-container");
-
+  // if (getFoodItemId("dessert")) {
+  //   var recipesDisplay = document.getElementById("dessert-recipe")
+  // }
+  // else {
+  var recipesDisplay = document.getElementById("dinner-recipe");
+  // }
   // dinner card
   var dinnerContainer = document.createElement("div");
   dinnerContainer.classList.add("recipe-container", "card");
@@ -177,7 +181,7 @@ function renderDinnerRecipe(foodObj) {
 
 // function to create cocktail elements and render to page
 function renderCocktailRecipe(drinkObj) {
-  var recipesDisplay = document.getElementById("recipes-container");
+  var recipesDisplay = document.getElementById("drink-recipe");
 
   // cocktail card
   var drinkContainer = document.createElement("div");
@@ -225,14 +229,40 @@ function renderCocktailRecipe(drinkObj) {
   drinkContainer.append(drinkSteps);
 }
 
-
-generateBtn.addEventListener('click', function(){
-  var recipesDisplay = document.getElementById("recipes-container");
+function resetRender() {
+  var dinnerDisplay = document.getElementById("dinner-recipe");
+  var dessertDisplay = document.getElementById("dessert-recipe");
+  var drinkDisplay = document.getElementById("drink-recipe");
+  var recipesDisplay = document.getElementById("header-div");
+  var loadImgDisplay = document.getElementById("load-image");
   recipesDisplay.innerHTML = ""
+  dinnerDisplay.innerHTML = ""
+  dessertDisplay.innerHTML = ""
+  drinkDisplay.innerHTML = ""
+  loadImgDisplay.innerHTML = ""
   var recipesHeader = document.createElement("h3");
   recipesHeader.classList.add("title", "is-5");
   recipesHeader.textContent = "Your Meal";
   recipesDisplay.append(recipesHeader);
-  getFoodItemId(category.value)
-  getCocktail(drinkCategory.value)
+}
+
+generateBtn.addEventListener('click', function(){
+  // var dinnerDisplay = document.getElementById("dinner-recipe");
+  // var dessertDisplay = document.getElementById("dessert-recipe");
+  // var drinkDisplay = document.getElementById("drink-recipe");
+  // var recipesDisplay = document.getElementById("header-div");
+  // var loadImgDisplay = document.getElementById("load-image");
+  // recipesDisplay.innerHTML = ""
+  // dinnerDisplay.innerHTML = ""
+  // dessertDisplay.innerHTML = ""
+  // drinkDisplay.innerHTML = ""
+  // loadImgDisplay.innerHTML = ""
+  // var recipesHeader = document.createElement("h3");
+  // recipesHeader.classList.add("title", "is-5");
+  // recipesHeader.textContent = "Your Meal";
+  // recipesDisplay.append(recipesHeader);
+  resetRender();
+  getFoodItemId(category.value);
+  getFoodItemId("dessert");
+  getCocktail(drinkCategory.value);
 })
