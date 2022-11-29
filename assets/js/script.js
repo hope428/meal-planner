@@ -368,7 +368,7 @@ function renderCocktailRecipe(drinkObj) {
     "card-header",
     "is-justify-content-space-between"
   );
-  drinkTitle.textContent = toUpperCase(drinkObj.name);
+  drinkTitle.textContent = drinkObj.name;
   drinkContainer.append(drinkTitle);
 
   // cocktail image section
