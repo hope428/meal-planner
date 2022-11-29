@@ -503,7 +503,7 @@ function resetRender() {
   drinkDisplay.innerHTML = "";
   loadImgDisplay.innerHTML = "";
   var recipesHeader = document.createElement("h3");
-  recipesHeader.classList.add("title", "is-5");
+  recipesHeader.classList.add("title", "is-5", "my-3", "has-text-grey-light");
   recipesHeader.textContent = "Your Meal";
   recipesDisplay.append(recipesHeader);
 }
