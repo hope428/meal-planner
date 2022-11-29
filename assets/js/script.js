@@ -230,6 +230,12 @@ function renderDinnerRecipe(foodObj) {
   // Local Storage
 }
 
+function clearAllFavorites(){
+  favorites = []
+  localStorage.clear()
+  renderFavorites()
+}
+
 function renderFavorites() {
   savedMeals.innerHTML = "";
   var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
@@ -247,7 +253,15 @@ function renderFavorites() {
 
       li.appendChild(button);
       savedMeals.appendChild(li);
+      
     }
+    var clearBtn = document.createElement('button')
+    clearBtn.classList.add("button", "is-danger")
+    clearBtn.setAttribute('style', "width: 100%")
+    clearBtn.textContent = "Clear All Favorites"
+    savedMeals.append(clearBtn)
+
+    clearBtn.addEventListener('click', clearAllFavorites)
   }
 }
 
@@ -396,7 +410,6 @@ function renderCocktailRecipe(drinkObj) {
 }
 
 savedMeals.addEventListener("click", displayFavorite);
-
 var favorite;
 
 function displayFavorite(event) {
@@ -444,7 +457,6 @@ function displayFavorite(event) {
               return response.json();
             })
             .then(function (data) {
-              console.log(data.drinks[0]);
               var favorite = data.drinks[0];
               favoriteObj = {
                 id: favorite.idDrink,
