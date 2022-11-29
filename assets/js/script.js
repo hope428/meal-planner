@@ -134,7 +134,6 @@ function getDessertId() {
     .then(function (data) {
       var item = data.meals[Math.floor(Math.random() * data.meals.length)];
       getDessertObject(item.idMeal);
-      console.log(item.idMeal);
     });
 }
 
@@ -171,7 +170,6 @@ function getDessertObject(dessertItemId) {
 
       //call render function with (dessertObj) as parameter
       renderDessertRecipe(dessertObj);
-      console.log(dessertObj);
     });
 }
 
@@ -183,7 +181,11 @@ function renderDinnerRecipe(foodObj) {
   recipesDisplay.append(dinnerContainer);
 
   var dinnerTitle = document.createElement("div");
-  dinnerTitle.classList.add("title", "card-header", "is-justify-content-space-between");
+  dinnerTitle.classList.add(
+    "title",
+    "card-header",
+    "is-justify-content-space-between"
+  );
   dinnerTitle.textContent = foodObj.name;
   dinnerContainer.append(dinnerTitle);
 
@@ -230,10 +232,10 @@ function renderDinnerRecipe(foodObj) {
   // Local Storage
 }
 
-function clearAllFavorites(){
-  favorites = []
-  localStorage.clear()
-  renderFavorites()
+function clearAllFavorites() {
+  favorites = [];
+  localStorage.clear();
+  renderFavorites();
 }
 
 function renderFavorites() {
@@ -242,7 +244,6 @@ function renderFavorites() {
   if (currentFavorites) {
     for (var i = 0; i < currentFavorites.length; i++) {
       var favorite = currentFavorites[i];
-      console.log(favorite);
 
       var li = document.createElement("li");
       li.setAttribute("favorites", i);
@@ -253,15 +254,14 @@ function renderFavorites() {
 
       li.appendChild(button);
       savedMeals.appendChild(li);
-      
     }
-    var clearBtn = document.createElement('button')
-    clearBtn.classList.add("button", "is-danger")
-    clearBtn.setAttribute('style', "width: 100%")
-    clearBtn.textContent = "Clear All Favorites"
-    savedMeals.append(clearBtn)
+    var clearBtn = document.createElement("button");
+    clearBtn.classList.add("button", "is-danger");
+    clearBtn.setAttribute("style", "width: 100%");
+    clearBtn.textContent = "Clear All Favorites";
+    savedMeals.append(clearBtn);
 
-    clearBtn.addEventListener('click', clearAllFavorites)
+    clearBtn.addEventListener("click", clearAllFavorites);
   }
 }
 
@@ -287,7 +287,7 @@ function storeDrinkFavorites() {
 function storeDessertFavorites() {
   favorites.push(dessertObj);
   localStorage.setItem("favorites", JSON.stringify(favorites));
-  init()
+  init();
 }
 
 init();
@@ -300,7 +300,11 @@ function renderDessertRecipe(dessertObj) {
   recipesDisplay.append(dessertContainer);
 
   var dessertTitle = document.createElement("div");
-  dessertTitle.classList.add("title", "card-header", "is-justify-content-space-between");
+  dessertTitle.classList.add(
+    "title",
+    "card-header",
+    "is-justify-content-space-between"
+  );
   dessertTitle.textContent = dessertObj.name;
   dessertContainer.append(dessertTitle);
 
@@ -310,7 +314,7 @@ function renderDessertRecipe(dessertObj) {
   dessertBtn.setAttribute("id", "dessert-fav-button");
   dessertContainer.querySelector(".card-header").appendChild(dessertBtn);
 
-  dessertBtn.addEventListener('click', storeDessertFavorites)
+  dessertBtn.addEventListener("click", storeDessertFavorites);
 
   // dessert image section
   var cardImgContainer = document.createElement("div");
@@ -359,7 +363,11 @@ function renderCocktailRecipe(drinkObj) {
   recipesDisplay.append(drinkContainer);
 
   var drinkTitle = document.createElement("div");
-  drinkTitle.classList.add("title", "card-header", "is-justify-content-space-between");
+  drinkTitle.classList.add(
+    "title",
+    "card-header",
+    "is-justify-content-space-between"
+  );
   drinkTitle.textContent = drinkObj.name;
   drinkContainer.append(drinkTitle);
 
@@ -396,8 +404,12 @@ function renderCocktailRecipe(drinkObj) {
   drinkIngMeasurements.classList.add("column", "is-one-third", "px-5");
   for (let i = 0; i < drinkObj.ingredients.length; i++) {
     var li = document.createElement("li");
-    li.textContent =
-      drinkObj.ingredientMeasurements[i] + " " + drinkObj.ingredients[i];
+    if (drinkObj.ingredientMeasurements[i] !== undefined) {
+      li.textContent =
+        drinkObj.ingredientMeasurements[i] + " " + drinkObj.ingredients[i];
+    } else {
+      li.textContent = drinkObj.ingredients[i];
+    }
     drinkIngMeasurementsUl.append(li);
   }
   drinkIngredientsContainer.append(drinkIngMeasurements);
