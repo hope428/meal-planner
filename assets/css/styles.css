@@ -4,7 +4,7 @@
 
 h1 {
   /* font-family: 'Fira Sans', sans-serif; */
-  font-family: 'Lobster', cursive;
+  font-family: 'Lobster Two', cursive;
 }
 
 .material-symbols-outlined {
@@ -17,7 +17,7 @@ h1 {
 
 .meal-span {
   font-family: 'Fira Sans', sans-serif;
-font-family: 'Lobster Two', cursive;
+font-family: 'Lobster', cursive;
 }
 /* Dropdown Button */
 .dropbtn {
