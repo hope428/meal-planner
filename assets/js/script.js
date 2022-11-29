@@ -183,7 +183,7 @@ function renderDinnerRecipe(foodObj) {
   recipesDisplay.append(dinnerContainer);
 
   var dinnerTitle = document.createElement("div");
-  dinnerTitle.classList.add("card-header");
+  dinnerTitle.classList.add("title", "card-header");
   dinnerTitle.textContent = foodObj.name;
   dinnerContainer.append(dinnerTitle);
 
@@ -286,7 +286,7 @@ function renderDessertRecipe(dessertObj) {
   recipesDisplay.append(dessertContainer);
 
   var dessertTitle = document.createElement("div");
-  dessertTitle.classList.add("card-header");
+  dessertTitle.classList.add("title", "card-header");
   dessertTitle.textContent = dessertObj.name;
   dessertContainer.append(dessertTitle);
 
@@ -345,7 +345,7 @@ function renderCocktailRecipe(drinkObj) {
   recipesDisplay.append(drinkContainer);
 
   var drinkTitle = document.createElement("div");
-  drinkTitle.classList.add("card-header");
+  drinkTitle.classList.add("title", "card-header");
   drinkTitle.textContent = drinkObj.name;
   drinkContainer.append(drinkTitle);
 
