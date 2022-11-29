@@ -1,5 +1,5 @@
 * {
-  font-family: 'Catamaran', sans-serif;
+  font-family: 'Mulish', sans-serif;
 }
 
 h1 {
@@ -20,10 +20,6 @@ h1 {
 font-family: 'Lobster', cursive;
 }
 
-.subtitle {
-  font-family: 'Nunito', sans-serif;
-
-}
 /* Dropdown Button */
 .dropbtn {
     background-color: #3498DB;
