@@ -215,7 +215,7 @@ function renderDinnerRecipe(foodObj) {
   btn.addEventListener("click", storeDinnerFavorites);
   var ingMeasurements = document.createElement("div");
   var ingMeasurementsUl = document.createElement("ul");
-  ingMeasurements.classList.add("column", "is-one-third", "px-5");
+  ingMeasurements.classList.add("column", "px-5");
   for (let i = 0; i < foodObj.ingredients.length; i++) {
     var li = document.createElement("li");
     li.textContent =
@@ -337,7 +337,7 @@ function renderDessertRecipe(dessertObj) {
   // ingredients
   var ingMeasurements = document.createElement("div");
   var ingMeasurementsUl = document.createElement("ul");
-  ingMeasurements.classList.add("column", "is-one-third", "px-5");
+  ingMeasurements.classList.add("column", "px-5");
   for (let i = 0; i < dessertObj.ingredients.length; i++) {
     var li = document.createElement("li");
     li.textContent =
@@ -401,7 +401,7 @@ function renderCocktailRecipe(drinkObj) {
   // ingredients
   var drinkIngMeasurements = document.createElement("div");
   var drinkIngMeasurementsUl = document.createElement("ul");
-  drinkIngMeasurements.classList.add("column", "is-one-third", "px-5");
+  drinkIngMeasurements.classList.add("column", "px-5");
   for (let i = 0; i < drinkObj.ingredients.length; i++) {
     var li = document.createElement("li");
     if (drinkObj.ingredientMeasurements[i] !== undefined) {
