@@ -19,6 +19,11 @@ h1 {
   font-family: 'Fira Sans', sans-serif;
 font-family: 'Lobster', cursive;
 }
+
+.subtitle {
+  font-family: 'Nunito', sans-serif;
+
+}
 /* Dropdown Button */
 .dropbtn {
     background-color: #3498DB;
