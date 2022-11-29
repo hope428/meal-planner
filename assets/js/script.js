@@ -496,7 +496,7 @@ function displayFavorite(event) {
               }
 
               resetRender();
-              renderDinnerRecipe(favoriteObj);
+              renderCocktailRecipe(favoriteObj);
             });
         }
       });
