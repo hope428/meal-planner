@@ -3,10 +3,10 @@
 }
 
 h1 {
-  /* font-family: 'Fira Sans', sans-serif; */
   font-family: 'Lobster Two', cursive;
 }
 
+/* for icon in header */
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
@@ -20,6 +20,9 @@ h1 {
 font-family: 'Lobster', cursive;
 }
 
+.subtitle {
+  font-size: 1rem;
+}
 /* Dropdown Button */
 .dropbtn {
     background-color: #3498DB;
@@ -85,15 +88,20 @@ font-family: 'Lobster', cursive;
 
   .card-header{
     background-color: rgb(255, 236, 216);
-    padding: 10px;
+    padding: 8px;
+    font-size: 1.5rem;
   }
 
   .hero-body{
     background-color: black;
     border-top: 10px black;
-    padding:  1rem 2rem;
+    padding:  1.75rem 2rem;
   }
 
   .my-3 {
     margin-bottom: -1.25rem!important;
+  }
+
+  .panel-heading {
+    padding: .5em 1em;
   }
